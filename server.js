@@ -13,7 +13,4 @@ require('./server/config/config.database');
 require('./server/routes/user.routes')(app);
 io.on("connection", socket => {
     console.log(socket.id);
-
-
-    
 });

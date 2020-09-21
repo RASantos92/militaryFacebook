@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-// import { Link } from '@reach/router'
+import { Link } from '@reach/router'
 
 const UserPage = props => {
     const [user, setUser] = useState([]);
@@ -15,9 +15,12 @@ const UserPage = props => {
         <div className="container vh-100" id="content">
             <div className="col mx-auto">
                 <p>Photo of selected user</p>
-                <p>User name/ los/ mos</p>
-                <p>message/post/upload</p>
-                <p>send carepackage</p>
+                <p>userName{user.userName}/ LOS{user.userLOS}/ MOS{user.userRateMOS}</p>
+                <div className="d-flex justify-content-around">
+                    <Link to="/" style={{color:"black"}}>Post</Link>
+                    <Link to="/" style={{color:"black"}}>Upload</Link>
+                </div>
+                <button className="btn btn-success">Send care package</button>
             </div>
             <div className="col mx-auto h-75">
                 posts from other users. direct and indirect
