@@ -11,10 +11,10 @@ function App() {
   return (
     <div className="App">
       <div className="col text-align-end">
-        profile name/ length of service/ mos
+        userName/ length of service/ mos
       </div>
       <div className="col mx-auto">
-        <Link to="/new/"><h1>Military Facebook</h1></Link>
+        <Link to="/new/"><h1 style={{color:"black"}}>Military Facebook</h1></Link>
       </div>
       <div className="col">
         {/* <Link to="/new" className="btn btn-info btn-outline-dark">Military Facebook</Link> */}
