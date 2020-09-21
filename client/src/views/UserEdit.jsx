@@ -3,7 +3,7 @@ import Axios from 'axios';
 import UserForm from '../components/UserForm';
 import { navigate } from '@reach/router';
 
-const Edit = props => {
+const UserEdit = props => {
     const initialErrors = {
         userFirstName:"",
         userLastName:"",
@@ -62,4 +62,4 @@ const Edit = props => {
     )
 }
 
-export default Edit;
+export default UserEdit;
