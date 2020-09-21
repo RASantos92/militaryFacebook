@@ -3,7 +3,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, Router } from '@reach/router';
 import UserPage from './views/UserPage';
-import UserLogin from './views/UserLogin';
+import UserReg from './views/UserReg';
+import UserLogin from './views/UserLogin'
 // import Show from './views/Show';
 // import Edit from './views/Edit';
 
@@ -24,8 +25,9 @@ function App() {
         <Link to="/" className="btn btn-info btn-outline-dark">Saved</Link>
       </div>
       <Router>
-        <UserPage path="/" />
-        <UserLogin path="/new"/>
+        <UserPage path="/userpage/:id" />
+        <UserReg path="/new"/>
+        <UserLogin path="/"/>
         {/* <Show path="/pet/:id"/> 
         <Edit path="/edit/:id"/> */}
       </Router>

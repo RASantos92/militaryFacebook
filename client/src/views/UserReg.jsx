@@ -1,65 +1,66 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
-import UserLoginForm from '../components/UserLoginForm';
+import UserForm from '../components/UserForm';
 import { navigate } from '@reach/router';
-import UserReg from './UserReg';
-import { Link, Router } from '@reach/router';
 
-
-const Login = props => {
+const New = props => {
     const initialUser = {
-        userName:"",
-        userPassword:"",
-        userConfirmPW:"",
+        userFirstName: "",
+        userLastName: "",
+        userName: "",
+        userEmail: "",
+        userPassword: "",
+        userConfirmPW: "",
+        userLocation: "",
+        userBranch: "",
     }
     const initialErrors = {
-        userName:"",
-        userPassword:"",
-        userConfirmPW:"",
+        userFirstName: "",
+        userLastName: "",
+        userName: "",
+        userEmail: "",
+        userPassword: "",
+        userConfirmPW: "",
+        userLocation: "",
+        userBranch: "",
     }
-    const [user,setUser] = useState(initialUser)
-    const [errors,setErrors] = useState(initialErrors);
+    const [user, setUser] = useState(initialUser)
+    const [errors, setErrors] = useState(initialErrors);
     const handleInput = e => {
         setUser({
             ...user,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-
-    //what should we put in the axios?
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(initialErrors)
-        Axios.get(`http://localhost:8000/api/user/${user.id}`,user)
+        Axios.post("http://localhost:8000/api/create/user", user)
             .then(res => {
-                if (res.data.results){
+                if (res.data.results) {
                     setUser(initialUser);
                     navigate(`/userpage/${user.id}`)
                 }
-                else{
+                else {
                     console.log(res.data)
                     setErrors(res.data)
                 }
             })
             .catch(err => console.log(err));
     }
-    return(
+    return (
         <div className="container vh-100" id="content">
             <h2>Strap Up</h2>
-            <Link to="/new">Register</Link>
-            <UserLoginForm
-                inputs = {user}
+            <UserForm
+                inputs={user}
                 errors={errors}
                 handleInput={handleInput}
                 handleSubmit={handleSubmit}
                 submitValue="Ship out"
             />
-            <Router>
-                <UserReg path="/new" />
-            </Router>
         </div>
     )
 }
 
-export default Login;
+export default New;
