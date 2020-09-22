@@ -11,13 +11,13 @@ module.exports = {
                 console.log(err);
             })
     },
-    create: (req, res) => {
-        User.create(req.body)
-            .then(user => {
-                res.json({ results: user })
-            })
-            .catch(err => res.json(err.errors))
-    },
+    // create: (req, res) => {
+    //     User.create(req.body)
+    //         .then(user => {
+    //             res.json({ results: user })
+    //         })
+    //         .catch(err => res.json(err.errors))
+    // },
     show: (req, res) => {
         User.findOne({ _id: req.params.id })
             .then(user => {
@@ -48,5 +48,13 @@ module.exports = {
         User.deleteOne({ _id: req.params.id })
             .then(result => res.json({ results: result }))
             .catch(err => res.json(err.errors))
+    },
+    register: (req, res) => {
+        User.create(req.body)
+            .then(user => {
+                res.json({ msg: "success!", user: user });
+            })
+            .catch(err => res.json(err));
     }
+
 }
