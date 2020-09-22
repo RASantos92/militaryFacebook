@@ -1,7 +1,7 @@
 // import { navigate } from '@reach/router';
 import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link, Router } from '@reach/router';
+import { Link } from '@reach/router';
 
 const Show = props => {
     const [user, setUser] = useState(null);
@@ -16,10 +16,10 @@ const Show = props => {
         <div className="container vh-100" id="content">
             {
                 user ? <>
-                    <div>
+                    <div className="vh-100">
                         <div className="col mx-auto">
             <p>Photo of selected user {user.userRank}</p>
-            <p>{user.userName}/ {user.userLOS}/ {user.userRateMOS}</p>
+            <p>{user.userName}|LOS:{user.userLOS}|MOS:{user.userRateMOS}</p>
                             <p style={{color:"black"}}>
                                 <Link to="/">Message</Link>
                                 <Link to="/">Post</Link>
