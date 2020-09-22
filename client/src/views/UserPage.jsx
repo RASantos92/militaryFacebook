@@ -15,7 +15,7 @@ const UserPage = props => {
         <div className="container vh-100" id="content">
             <div className="col mx-auto">
                 <p>Photo of selected user</p>
-                <p>userName{user.userName}/ LOS{user.userLOS}/ MOS{user.userRateMOS}</p>
+                <p>userName{user.userName}/ LOS{user.userBranch}/ MOS{user.userLocation}</p>
                 <div className="d-flex justify-content-around">
                     <Link to="/" style={{color:"black"}}>Post</Link>
                     <Link to="/" style={{color:"black"}}>Upload</Link>
