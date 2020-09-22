@@ -5,6 +5,8 @@ import { Link, Router } from '@reach/router';
 import UserPage from './views/UserPage';
 import UserReg from './views/UserReg';
 import UserLogin from './views/UserLogin'
+import AllUsers from './views/AllUsers'
+import ShowUser from './views/ShowUser'
 // import Show from './views/Show';
 // import Edit from './views/Edit';
 
@@ -20,16 +22,16 @@ function App() {
       <div className="col">
         {/* <Link to="/new" className="btn btn-info btn-outline-dark">Military Facebook</Link> */}
         <Link to="/" className="btn btn-info btn-outline-dark">Home</Link>
-        <Link to="/" className="btn btn-info btn-outline-dark">Friends</Link>
+        <Link to="/user" className="btn btn-info btn-outline-dark">Friends</Link>
         <Link to="/" className="btn btn-info btn-outline-dark">Recruitment</Link>
-        <Link to="/" className="btn btn-info btn-outline-dark">Saved</Link>
+        <Link to="/" className="btn btn-info btn-outline-dark">Liked</Link>
       </div>
       <Router>
         <UserPage path="/userpage/:id" />
         <UserReg path="/new"/>
         <UserLogin path="/"/>
-        {/* <Show path="/pet/:id"/> 
-        <Edit path="/edit/:id"/> */}
+        <AllUsers path="/user"/> 
+        <ShowUser path="/user/:id"/>
       </Router>
 
     </div>

@@ -4,6 +4,7 @@ const UserForm = props => {
     const {inputs,handleInput,handleSubmit,errors,submitValue} = props;
     return(
         <form className="col mx-auto" onSubmit={handleSubmit}>
+            
             <div className="form-group">
                 <label htmlFor="userName">User Name:</label>
                 <input className="form-control" type="text" value={inputs.userName} onChange={handleInput} name="userName"/>
@@ -20,20 +21,40 @@ const UserForm = props => {
                 <span className="text-danger">{errors.userLastName ? errors.userLastName.message : ""}</span>
             </div>
             <div className="form-group">
-                <label htmlFor="userLocation">Stationed At:</label>
+                <label htmlFor="userLocation">Stationed At / Location:</label>
                 <input className="form-control" type="text" value={inputs.userLocation} onChange={handleInput} name="userLocation"/>
                 <span className="text-danger">{errors.userLocation ? errors.userLocation.message : ""}</span>
             </div>
-            <div className="form-group">
-                <label htmlFor="userBranch">Branch:</label>
-                <input className="form-control" type="text" value={inputs.userBranch} onChange={handleInput} name="userBranch"/>
-                <span className="text-danger">{errors.userBranch ? errors.userBranch.message : ""}</span>
-            </div>
+            
             <div className="form-group">
                 <label htmlFor="userEmail">Email:</label>
                 <input className="form-control" type="text" value={inputs.userEmail} onChange={handleInput} name="userEmail"/>
                 <span className="text-danger">{errors.userEmail ? errors.userEmail.message : ""}</span>
             </div>
+
+            {/* add click.hide jquery */}
+            <p className="text-success">for military personel only</p>
+            <div className="form-group">
+                <label htmlFor="userRank"><p className="text-success">Rank:</p></label>
+                <input className="form-control" type="text" value={inputs.userRank} onChange={handleInput} name="userRank"/>
+                <span className="text-danger">{errors.userRank ? errors.userRank.message : ""}</span>
+            </div>
+            <div className="form-group">
+                <label htmlFor="userRateMOS"><p className="text-success">Rank / MOS:</p></label>
+                <input className="form-control" type="text" value={inputs.userRateMOS} onChange={handleInput} name="userRateMOS"/>
+                <span className="text-danger">{errors.userRateMOS ? errors.userRateMOS.message : ""}</span>
+            </div>
+            <div className="form-group">
+                <label htmlFor="userLOS"><p className="text-success">length of service:</p></label>
+                <input className="form-control" type="number" value={inputs.userLOS} onChange={handleInput} name="userLOS"/>
+                <span className="text-danger">{errors.userLOS ? errors.userLOS.message : ""}</span>
+            </div>
+            <div className="form-group">
+                <label htmlFor="userBranch"><p className="text-success">Branch:</p></label>
+                <input className="form-control" type="text" value={inputs.userBranch} onChange={handleInput} name="userBranch"/>
+                <span className="text-danger">{errors.userBranch ? errors.userBranch.message : ""}</span>
+            </div>
+                {/* stop here */}
             <div className="form-group">
                 <label htmlFor="userPassword">Password:</label>
                 <input className="form-control" type="password" value={inputs.userPassword} onChange={handleInput} name="userPassword"/>
