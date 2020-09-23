@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
-const Messages = require('../models/user.model');
+// const Messages = require('../models/user.model');
+const jwt = require('jsonwebtoken')
 
 module.exports = {
     index: (req, res) => {
@@ -55,6 +56,68 @@ module.exports = {
                 res.json({ msg: "success!", user: user });
             })
             .catch(err => res.json(err));
-    }
+    },
+    login(req, res) {
+        User.findOne({ user: req.body.user })
+            .then((user) => {
+                if (user === null) {
+                    res.status(400).json({ msg: "invalid login attempt" });
+                } else {
+                    bcrypt
+                        .compare(req.body.password, user.userPassword)
+                        .then((passwordIsValid) => {
+                            if (passwordIsValid) {
+                                res
+                                    .cookie(
+                                        "usertoken",
+                                        jwt.sign({ _id: user._id }, process.env.JWT_SECRET),
+                                        {
+                                            httpOnly: true,
+                                        }
+                                    )
+                                    .json({ msg: "success!" });
+                            } else {
+                                res.status(400).json({ msg: "invalid login attempt" });
+                            }
+                        })
+                        .catch((err) =>
+                            res.status(400).json({ msg: "invalid login attempt" })
+                        );
+                }
+            })
+            .catch((err) => res.json(err));
+    },
+    logout(req, res) {
+        res
+            .cookie("usertoken", jwt.sign({ _id: "" }, process.env.JWT_SECRET), {
+                httpOnly: true,
+                maxAge: 0,
+            })
+            .json({ msg: "ok" });
+    },
+    logout2(req, res) {
+        res.clearCookie("usertoken");
+        res.json({ msg: "usertoken cookie cleared" });
+    },
 
-}
+    getLoggedInUser(req, res) {
+        const decodedJWT = jwt.decode(req.cookies.usertoken, { complete: true });
+
+        User.findById(decodedJWT.payload._id)
+            .then((user) => res.json(user))
+            .catch((err) => res.json(err));
+    },
+
+    // getAll(req, res) {
+    //     User.find()
+    //         .then((users) => res.json(users))
+    //         .catch((err) => res.json(err));
+    // },
+
+    // getOne(req, res) {
+    //     User.findOne({ _id: req.params.id })
+    //         .then((user) => res.json(user))
+    //         .catch((err) => res.json(err));
+    // },
+};
+
