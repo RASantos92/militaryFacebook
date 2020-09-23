@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, Router } from '@reach/router';
@@ -7,11 +7,20 @@ import UserReg from './views/UserReg';
 import UserLogin from './views/UserLogin'
 import AllUsers from './views/AllUsers'
 import ShowUser from './views/ShowUser'
+import UserEdit from './views/UserEdit'
+// import Axios from 'axios'
+import background from './assets/img/military.jpg';
 // import Show from './views/Show';
 // import Edit from './views/Edit';
-import background from './assets/img/military.jpg';
+
 
 function App() {
+  // Axios.get("http://localhost:8000/api/user/loggedin",{withCredentials:true})
+  // .then(res => {
+  //         console.log(res.data);
+  // })
+  // .catch(err=> console.log(err))
+  
   return (
     <div className="App" style={{backgroundImage:` url(${background})`}}>
       <div className="col-10 mx-auto text-align-end bg-white">
@@ -33,6 +42,7 @@ function App() {
         <UserLogin path="/"/>
         <AllUsers path="/user"/> 
         <ShowUser path="/user/:id"/>
+        <UserEdit path="/user/edit/:id"/>
       </Router>
 
     </div>

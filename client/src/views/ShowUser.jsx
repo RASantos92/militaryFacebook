@@ -7,7 +7,7 @@ const Show = props => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        Axios.get(`http://localhost:8000/api/user/${props.id}`)
+        Axios.get(`http://localhost:8000/api/user/${props.id}`,{withCredentials:true})
             .then(res => setUser(res.data.results))
             .catch(err => console.log(err));
     }, [props])
