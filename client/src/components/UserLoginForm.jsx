@@ -1,22 +1,60 @@
-import React from 'react';
+import React, { useState } from "react";
+import axios from "axios";
+import { navigate } from "@reach/router";
 
-const UserForm = props => {
-    const {inputs,handleInput,handleSubmit,errors,submitValue} = props;
-    return(
-        <form className="col mx-auto" onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label htmlFor="userName">User Name:</label>
-                <input className="form-control" type="text" value={inputs.userName} onChange={handleInput} name="userName"/>
-                <span className="text-danger">{errors.userName ? errors.userName.message : ""}</span>
-            </div>
-            <div className="form-group">
-                <label htmlFor="userPassword">Password:</label>
-                <input className="form-control" type="password" value={inputs.userPassword} onChange={handleInput} name="userPassword"/>
-                <span className="text-danger">{errors.userPassword? errors.userPassword.message : ""}</span>
-            </div>
-            <input type="submit" value={submitValue} className="btn btn-info"/>
-        </form>
-    )
-}
+const Login = ({ setLoggedIn }) => {
+    const [user, setUser] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-export default UserForm;
+    const login = (event) => {
+        event.preventDefault();
+        axios
+            .post(
+                "http://localhost:8000/api/user",
+                { user, password },
+                {
+                    withCredentials: true,
+                }
+            )
+            .then((res) => {
+                console.log(res);
+                setLoggedIn();
+                navigate(`/userpage/${user.id}`);
+            })
+            .catch((err) => {
+                console.log(err);
+                setErrorMessage(err.response.data.msg);
+            });
+    };
+
+    return (
+        <fieldset>
+            <legend>Sign In</legend>
+            <form onSubmit={login}>
+                <p className="form-group">
+                    <label>User Name:</label>
+                    <input
+                        type="text"
+                        name="userName"
+                        onChange={(e) => setUser(e.target.value)}
+                        value={user}
+                    />
+                </p>
+                <p className="form-group">
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        name="userPassword"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                    />
+                </p>
+                <input type="submit" value="Sign In" className="btn btn-info" />
+                <p className="error-message">{errorMessage ? errorMessage : ""}</p>
+            </form>
+        </fieldset>
+    );
+};
+
+export default Login;
