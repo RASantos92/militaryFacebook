@@ -45,8 +45,9 @@ require("./server/routes/user.routes")(app);
 require("./server/config/config.database")(process.env.DB_NAME);
 
 
-app.listen(process.env.DB_PORT, () =>
-    console.log(`Listening on port ${process.env.DB_PORT}`)
+
+app.listen(process.env.port, () =>
+    console.log(`Now ROCKING out on port ${process.env.DB_PORT}`)
 );
 
 
