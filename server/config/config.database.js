@@ -22,7 +22,7 @@ module.exports = db_name => {
             useUnifiedTopology: true,
             useFindAndModify: false
         })
-        .then(() => console.log(`Successfully connected to ${db_name}`))
+        .then(() => console.log(`Successfully connected to "${db_name}" database`))
         .catch(err => console.log("mongoose connection failed: ", err));
 };
 
