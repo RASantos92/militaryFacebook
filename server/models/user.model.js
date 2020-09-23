@@ -117,3 +117,19 @@ const User = mongoose.model("User", UserSchema);
 //Finally we export it out of the file.
 module.exports = User;
 // module.exports = Message;
+
+
+
+
+
+
+
+
+    // const [userFirstName, setFirstName] = useState("");
+    // const [userLastName, setLastName] = useState("");
+    // const [userBranch, setBranch] = useState("");
+    // const [userLocation, setLocation] = useState("");
+    // const [userRank, setRank] = useState("");
+    // const [userRateMOS, setRateMos] = useState("");
+    // const [userLOS, setLOS] = useState("");
+    // const [errors, setErrors] = useState(null);

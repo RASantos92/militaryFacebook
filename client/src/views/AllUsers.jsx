@@ -6,7 +6,7 @@ const Main = props => {
     const [user, setUser] = useState([]);
 
     useEffect(() => {
-        Axios.get('http://localhost:8000/api/user')
+        Axios.get('http://localhost:8000/api/user',{withCredentials:true})
             .then(res => setUser(res.data.results))
             .catch(err => console.log(err))
     }, [])

@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 // const Messages = require('../models/user.model');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 module.exports = {
     index: (req, res) => {
@@ -58,15 +59,21 @@ module.exports = {
             .catch(err => res.json(err));
     },
     login(req, res) {
-        User.findOne({ user: req.body.user })
+        console.log("We are now loggin in.")
+        console.log(req.body)
+        User.findOne({ userName: req.body.userName })
             .then((user) => {
+                console.log(user)
                 if (user === null) {
                     res.status(400).json({ msg: "invalid login attempt" });
                 } else {
+                    console.log("We are about to bcrypt")
+
                     bcrypt
-                        .compare(req.body.password, user.userPassword)
+                        .compare(req.body.userPassword, user.userPassword)
                         .then((passwordIsValid) => {
                             if (passwordIsValid) {
+                                console.log("THis is about to happen",process.env.JWT_SECRET);
                                 res
                                     .cookie(
                                         "usertoken",
@@ -77,6 +84,7 @@ module.exports = {
                                     )
                                     .json({ msg: "success!" });
                             } else {
+                                console.log("Uhhhhhhhhhhh")
                                 res.status(400).json({ msg: "invalid login attempt" });
                             }
                         })
