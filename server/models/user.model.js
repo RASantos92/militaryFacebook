@@ -53,12 +53,10 @@ const UserSchema = new mongoose.Schema({
     userLocation: {
         type: String,
         required: [true, "Where in the world do you live and/or stationed?"],
-        // minlength: [3,"type need to ba at least 3 characters"]
     },
     userBranch: {
         type: String,
         required: [true, "Must declare what branch and/or civilian"],
-        // minlength: [3,"type need to ba at least 3 characters"]
     },
     userRank: {
         type: String,

@@ -5,6 +5,7 @@ import {Link,navigate} from  '@reach/router';
 
 
 const Login = props => {
+    const {setLogged} = props;
     const initialState = {
         userName:"",
         userPassword:""
@@ -24,22 +25,22 @@ const Login = props => {
         e.preventDefault();
         Axios.post("http://localhost:8000/api/login",log,{withCredentials:true})
             .then(res => {
+                    setLogged(res.data.user)
+                    console.log(res.data.user._id);
                     console.log("were loged in")
-                    navigate(`/userpage/${log._id}`);
+                    navigate(`/userpage/${res.data.user._id}`);
             })
             .catch(err => {
-                console.log("sike")
-                if(err.response.status === 400){
-                    let err = {
-                        userPassword :{
-                            message:"Invalid Credentials"
-                        },
-                        userName :{
-                            message:"Invalid Credentials"
-                        }
-                    }
-                    setErrors(err);
-                }
+                console.log(err.response)
+                console.log('youve hit an error!');
+                setErrors(
+                    {userPassword :{
+                        message:"Invalid Credentials"
+                    },
+                    userName :{
+                        message:"Invalid Credentials"
+                    }}
+                );
             })
     }
 
