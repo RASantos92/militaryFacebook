@@ -54,26 +54,34 @@ module.exports = {
     register: (req, res) => {
         User.create(req.body)
             .then(user => {
-                res.json({ msg: "success!", user: user });
+                res
+                    .cookie(
+                        "usertoken",
+                        jwt.sign({ id: user._id }, process.env.JWT_SECRET),
+                        {
+                            httpOnly: true,
+                        }
+                    )
+                    .json({ msg: "success!", user: user.userName });
             })
             .catch(err => res.json(err));
     },
-    login(req, res) {
-        console.log("We are now loggin in.")
-        console.log(req.body)
+    login: (req, res) => {
+        // console.log("We are now loggin in.")
+        // console.log(req.body)
         User.findOne({ userName: req.body.userName })
-            .then((user) => {
-                console.log(user)
-                if (user === null) {
-                    res.status(400).json({ msg: "invalid login attempt" });
+            .then(user => {
+                // console.log(user)
+                if (user == null) {
+                    res.status(400).json({ msg: "invalid login attempt" })
+                    res.cookie()
                 } else {
-                    console.log("We are about to bcrypt")
-
+                    // console.log("We are about to bcrypt")
                     bcrypt
                         .compare(req.body.userPassword, user.userPassword)
-                        .then((passwordIsValid) => {
-                            if (passwordIsValid) {
-                                console.log("THis is about to happen",process.env.JWT_SECRET);
+                        .then(passwordIsValid => {
+                            if (passwordIsValid === true) {
+                                // console.log("THis is about to happen", process.env.JWT_SECRET);
                                 res
                                     .cookie(
                                         "usertoken",
@@ -84,31 +92,24 @@ module.exports = {
                                     )
                                     .json({ msg: "success!" });
                             } else {
-                                console.log("Uhhhhhhhhhhh")
-                                res.status(400).json({ msg: "invalid login attempt" });
+                                // console.log("Uhhhhhhhhhhh")
+                                res.status(400).json({ msg: "invalid login attempt" })
                             }
                         })
-                        .catch((err) =>
+                        .catch(err => {
+                            console.log(err)
                             res.status(400).json({ msg: "invalid login attempt" })
-                        );
+                        })
                 }
             })
-            .catch((err) => res.json(err));
+            .catch(err => res.status(400).json(err.errors));
     },
-    logout(req, res) {
-        res
-            .cookie("usertoken", jwt.sign({ _id: "" }, process.env.JWT_SECRET), {
-                httpOnly: true,
-                maxAge: 0,
-            })
-            .json({ msg: "ok" });
-    },
-    logout2(req, res) {
+    logout: (req, res) => {
         res.clearCookie("usertoken");
         res.json({ msg: "usertoken cookie cleared" });
     },
 
-    getLoggedInUser(req, res) {
+    getLoggedInUser: (req, res) => {
         const decodedJWT = jwt.decode(req.cookies.usertoken, { complete: true });
 
         User.findById(decodedJWT.payload._id)
@@ -116,16 +117,5 @@ module.exports = {
             .catch((err) => res.json(err));
     },
 
-    // getAll(req, res) {
-    //     User.find()
-    //         .then((users) => res.json(users))
-    //         .catch((err) => res.json(err));
-    // },
-
-    // getOne(req, res) {
-    //     User.findOne({ _id: req.params.id })
-    //         .then((user) => res.json(user))
-    //         .catch((err) => res.json(err));
-    // },
 };
 

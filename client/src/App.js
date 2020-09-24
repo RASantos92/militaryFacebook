@@ -1,4 +1,5 @@
-import React,{useEffect} from 'react';
+import React from 'react';
+// import{useEffect} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, Router } from '@reach/router';
@@ -20,14 +21,14 @@ function App() {
   //         console.log(res.data);
   // })
   // .catch(err=> console.log(err))
-  
+
   return (
-    <div className="App" style={{backgroundImage:` url(${background})`}}>
+    <div className="App" style={{ backgroundImage: ` url(${background})` }}>
       <div className="col-10 mx-auto text-align-end bg-white">
         userName/ length of service/ mos
       </div>
       <div className="col mx-auto">
-        <Link to="/new/"><h1 style={{color:"black"}} className="bg-white">Military Facebook</h1></Link>
+        <Link to="/new/"><h1 style={{ color: "black" }} className="bg-white">Military Facebook</h1></Link>
       </div>
       <div className="col bg-white">
         {/* <Link to="/new" className="btn btn-info btn-outline-dark">Military Facebook</Link> */}
@@ -38,11 +39,11 @@ function App() {
       </div>
       <Router>
         <UserPage path="/userpage/:id" />
-        <UserReg path="/new"/>
-        <UserLogin path="/"/>
-        <AllUsers path="/user"/> 
-        <ShowUser path="/user/:id"/>
-        <UserEdit path="/user/edit/:id"/>
+        <UserReg path="/new" />
+        <UserLogin path="/" />
+        <AllUsers path="/user" />
+        <ShowUser path="/user/:id" />
+        <UserEdit path="/user/edit/:id" />
       </Router>
 
     </div>

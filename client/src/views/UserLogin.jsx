@@ -1,41 +1,41 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import Input from '../components/Input';
-import {Link,navigate} from  '@reach/router';
+import { Link, navigate } from '@reach/router';
 
 
 const Login = props => {
     const initialState = {
-        userName:"",
-        userPassword:""
+        userName: "",
+        userPassword: ""
     }
-    const [log,setLog] = useState(initialState);
-    const [errors,setErrors] = useState(initialState);
+    const [log, setLog] = useState(initialState);
+    const [errors, setErrors] = useState(initialState);
 
 
     const handleInputChange = (e) => {
         setLog({
             ...log,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        Axios.post("http://localhost:8000/api/login",log,{withCredentials:true})
+        Axios.post("http://localhost:8000/api/login", log, { withCredentials: true })
             .then(res => {
-                    console.log("were loged in")
-                    navigate(`/userpage/${log._id}`);
+                console.log("were loged in")
+                navigate(`/userpage/${log._id}`);
             })
             .catch(err => {
                 console.log("sike")
-                if(err.response.status === 400){
+                if (err.response.status === 400) {
                     let err = {
-                        userPassword :{
-                            message:"Invalid Credentials"
+                        userPassword: {
+                            message: "Invalid Credentials"
                         },
-                        userName :{
-                            message:"Invalid Credentials"
+                        userName: {
+                            message: "Invalid Credentials"
                         }
                     }
                     setErrors(err);
@@ -47,7 +47,7 @@ const Login = props => {
     return (
         <form onSubmit={handleSubmit} className="col-5 my-5 mx-auto bg-dark text-light p-4 rounded">
             <h2>Login</h2>
-            <Input 
+            <Input
                 type="text"
                 name="userName"
                 label="User Name:"
@@ -56,7 +56,7 @@ const Login = props => {
                 handleChange={handleInputChange}
                 error={errors.userName}
             />
-            <Input 
+            <Input
                 type="password"
                 name="userPassword"
                 label="Password:"
@@ -64,7 +64,7 @@ const Login = props => {
                 handleChange={handleInputChange}
                 error={errors.userPassword}
             />
-            <Input 
+            <Input
                 type="submit"
                 value="Login"
             />
