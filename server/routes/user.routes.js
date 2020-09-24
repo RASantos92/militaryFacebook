@@ -2,6 +2,10 @@ const UserController = require('../controllers/user.controller');
 const { authenticate } = require("../config/config.JWT");
 
 module.exports = (app) => {
+    console.log(" OH Hi")
+    app.get("/api/test", (req,res) => {
+        console.log("In the routes");
+        UserController.test(req,res)})
     app.post("/api/login", UserController.login);
     app.post('/api/create/user', UserController.register);
     app.get('/api/user', authenticate,UserController.index);

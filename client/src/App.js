@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useState} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, Router } from '@reach/router';
@@ -15,21 +15,16 @@ import background from './assets/img/military.jpg';
 
 
 function App() {
-  // Axios.get("http://localhost:8000/api/user/loggedin",{withCredentials:true})
-  // .then(res => {
-  //         console.log(res.data);
-  // })
-  // .catch(err=> console.log(err))
-  
+  const[logged,setLogged] = useState(null);
   return (
     <div className="App" style={{backgroundImage:` url(${background})`}}>
       <div className="col-10 mx-auto text-align-end bg-white">
-        userName/ length of service/ mos
+        {logged !== null ? `${logged.userName}||`:""} {logged !== null ? `${logged.userLOS} Years ||`:""} {logged !== null ? `${logged.userRateMOS} Duty`:""}
       </div>
       <div className="col mx-auto">
         <Link to="/new/"><h1 style={{color:"black"}} className="bg-white">Military Facebook</h1></Link>
       </div>
-      <div className="col bg-white">
+      <div className="col">
         {/* <Link to="/new" className="btn btn-info btn-outline-dark">Military Facebook</Link> */}
         <Link to="/" className="btn btn-info btn-outline-dark">Home</Link>
         <Link to="/user" className="btn btn-info btn-outline-dark">Friends</Link>
@@ -37,9 +32,18 @@ function App() {
         <Link to="/" className="btn btn-info btn-outline-dark">Liked</Link>
       </div>
       <Router>
-        <UserPage path="/userpage/:id" />
-        <UserReg path="/new"/>
-        <UserLogin path="/"/>
+        <UserPage 
+        path="/userpage/:id" 
+        logged={logged}
+        />
+        <UserReg 
+        path="/new"
+        setLogged={setLogged}
+        />
+        <UserLogin 
+        path="/"
+        setLogged={setLogged}
+        />
         <AllUsers path="/user"/> 
         <ShowUser path="/user/:id"/>
         <UserEdit path="/user/edit/:id"/>
