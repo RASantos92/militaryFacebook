@@ -1,5 +1,4 @@
 const User = require('../models/user.model');
-// const Messages = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -64,7 +63,10 @@ module.exports = {
                     )
                     .json({ msg: "success!", user: user.userName });
             })
-            .catch(err => res.json(err));
+            .catch(err => res.json(err.errors));
+    },
+    test(req,res) {
+        res.json("success")
     },
     login: (req, res) => {
         // console.log("We are now loggin in.")
@@ -90,7 +92,7 @@ module.exports = {
                                             httpOnly: true,
                                         }
                                     )
-                                    .json({ msg: "success!" });
+                                    .json({ user: user });
                             } else {
                                 // console.log("Uhhhhhhhhhhh")
                                 res.status(400).json({ msg: "invalid login attempt" })

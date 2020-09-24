@@ -49,5 +49,5 @@ require("./server/config/config.database")(process.env.DB_NAME);
 app.listen(process.env.DB_PORT, () =>
     console.log(`Now ROCKING out on port ${process.env.DB_PORT}`)
 );
-
+console.log("Lisa you're killing me!")
 
