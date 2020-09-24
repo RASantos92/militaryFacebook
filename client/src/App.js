@@ -17,12 +17,12 @@ import background from './assets/img/military.jpg';
 function App() {
   const[logged,setLogged] = useState(null);
   return (
-    <div className="App" style={{backgroundImage:` url(${background})`}}>
+    <div className="App" style={{ backgroundImage: ` url(${background})` }}>
       <div className="col-10 mx-auto text-align-end bg-white">
         {logged !== null ? `${logged.userName}||`:""} {logged !== null ? `${logged.userLOS} Years ||`:""} {logged !== null ? `${logged.userRateMOS} Duty`:""}
       </div>
       <div className="col mx-auto">
-        <Link to="/new/"><h1 style={{color:"black"}} className="bg-white">Military Facebook</h1></Link>
+        <Link to="/new/"><h1 style={{ color: "black" }} className="bg-white">Military Facebook</h1></Link>
       </div>
       <div className="col">
         {/* <Link to="/new" className="btn btn-info btn-outline-dark">Military Facebook</Link> */}

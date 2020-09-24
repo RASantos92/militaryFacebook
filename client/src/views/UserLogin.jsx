@@ -1,29 +1,29 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import Input from '../components/Input';
-import {Link,navigate} from  '@reach/router';
+import { Link, navigate } from '@reach/router';
 
 
 const Login = props => {
     const {setLogged} = props;
     const initialState = {
-        userName:"",
-        userPassword:""
+        userName: "",
+        userPassword: ""
     }
-    const [log,setLog] = useState(initialState);
-    const [errors,setErrors] = useState(initialState);
+    const [log, setLog] = useState(initialState);
+    const [errors, setErrors] = useState(initialState);
 
 
     const handleInputChange = (e) => {
         setLog({
             ...log,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        Axios.post("http://localhost:8000/api/login",log,{withCredentials:true})
+        Axios.post("http://localhost:8000/api/login", log, { withCredentials: true })
             .then(res => {
                     setLogged(res.data.user)
                     console.log(res.data.user._id);
@@ -48,7 +48,7 @@ const Login = props => {
     return (
         <form onSubmit={handleSubmit} className="col-5 my-5 mx-auto bg-dark text-light p-4 rounded">
             <h2>Login</h2>
-            <Input 
+            <Input
                 type="text"
                 name="userName"
                 label="User Name:"
@@ -57,7 +57,7 @@ const Login = props => {
                 handleChange={handleInputChange}
                 error={errors.userName}
             />
-            <Input 
+            <Input
                 type="password"
                 name="userPassword"
                 label="Password:"
@@ -65,7 +65,7 @@ const Login = props => {
                 handleChange={handleInputChange}
                 error={errors.userPassword}
             />
-            <Input 
+            <Input
                 type="submit"
                 value="Login"
             />
