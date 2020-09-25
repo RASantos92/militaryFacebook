@@ -12,7 +12,6 @@ const UserPage = props => {
                     <Link to="/" style={{color:"black"}}>Post</Link>
                     <Link to="/" style={{color:"black"}}>Upload</Link>
                 </div>
-                <button className="btn btn-success">Send care package</button>
             </div>
             <div className="col mx-auto h-75 bg-white">
                 posts from other users. direct and indirect

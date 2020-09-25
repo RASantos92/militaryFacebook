@@ -25,7 +25,7 @@ const Show = props => {
                                 <Link to="/">Post</Link>
                                 <Link to="/">Upload</Link>
                             </p>
-                            <button className="btn btn-success">Send care package</button>
+                            <a href="https://www.herocarepackages.com/curated?msclkid=980a748967fb1e23094d2be4958299fb" className="btn btn-success">Send Care Package</a>
                         </div>
                         <div className="col mx-auto h-75">
                             posts from other users. direct and indirect
