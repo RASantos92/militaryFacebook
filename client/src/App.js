@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, Router } from '@reach/router';
+import { Link, navigate, Router } from '@reach/router';
 import UserPage from './views/UserPage';
 import UserReg from './views/UserReg';
 import UserLogin from './views/UserLogin'
@@ -10,26 +10,36 @@ import ShowUser from './views/ShowUser'
 import UserEdit from './views/UserEdit'
 // import Axios from 'axios'
 import background from './assets/img/military.jpg';
+import Axios from 'axios';
 // import Show from './views/Show';
 // import Edit from './views/Edit';
 
 
 function App() {
   const[logged,setLogged] = useState(null);
+  const handleLogout = () => {
+    Axios.get("http://localhost:8000/api/logout",{withCredentials:true})
+    .then(res => {
+      navigate("/")
+      setLogged("")
+    })
+    .catch(err => console.log(err))
+  }
   return (
     <div className="App" style={{ backgroundImage: ` url(${background})` }}>
-      <div className="col-10 mx-auto text-align-end bg-white">
-        {logged !== null ? `${logged.userName}||`:""} {logged !== null ? `${logged.userLOS} Years ||`:""} {logged !== null ? `${logged.userRateMOS} Duty`:""}
-      </div>
+      {logged !== "" ? <div className="col-10 mx-auto text-align-end bg-white">
+        {logged !== null ? `${logged.userName}||`:""} {logged !== null ? <Link className="btn btn-outline-warning btn-dark" to={`/user/edit/${logged.id}`}>Edit</Link>:""}{logged !==null ? <Link onClick={handleLogout}className="btn btn-outline-danger btn-dark" to={`/user/edit/${logged.id}`}>Logout</Link>:""}
+      </div>:""}
       <div className="col mx-auto">
         <Link to="/new/"><h1 style={{ color: "black" }} className="bg-white">Military Facebook</h1></Link>
       </div>
       <div className="col">
         {/* <Link to="/new" className="btn btn-info btn-outline-dark">Military Facebook</Link> */}
-        <Link to="/" className="btn btn-info btn-outline-dark">Home</Link>
-        <Link to="/user" className="btn btn-info btn-outline-dark">Friends</Link>
-        <Link to="/" className="btn btn-info btn-outline-dark">Recruitment</Link>
-        <Link to="/" className="btn btn-info btn-outline-dark">Liked</Link>
+        <Link to={logged !== null ? `/userpage/${logged.id}`:"/"} className="btn btn-info btn-outline-dark">Home</Link>
+  <Link to="/user" className="btn btn-info btn-outline-dark">friends</Link>
+        <Link to="" className="btn btn-info btn-outline-dark">Recruitment</Link>
+        <Link to="/" className="btn btn-info btn-outline-dark">Logout</Link>{/* dont forget to add logout */}
+        
       </div>
       <Router>
         <UserPage 
@@ -46,7 +56,11 @@ function App() {
         />
         <AllUsers path="/user"/> 
         <ShowUser path="/user/:id"/>
-        <UserEdit path="/user/edit/:id"/>
+        <UserEdit 
+        path="/user/edit/:id"
+        setLogged={setLogged}
+        logged={logged}
+        />
       </Router>
 
     </div>

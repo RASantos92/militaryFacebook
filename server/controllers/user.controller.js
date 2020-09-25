@@ -37,11 +37,12 @@ module.exports = {
             user.userRank = req.body.userRank;
             user.userRateMOS = req.body.userRateMOS;
             user.userLOS = req.body.userMessage;
+            user.userConfirmPW = req.body.userConfirmPW;
             user.save(function (err, saveduser) {
                 if (saveduser == null)
                     res.status(400).json(err);
                 else
-                    res.json({ user: savedUser });
+                    res.json({ user: saveduser });
             })
         })
     },

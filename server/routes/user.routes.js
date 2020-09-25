@@ -12,7 +12,7 @@ module.exports = (app) => {
     app.get('/api/user/:id', authenticate, UserController.show);
     app.put('/api/update/user/:id', authenticate, UserController.update);
     app.delete('/api/destroy/user/:id', authenticate, UserController.destroy);
-    app.post("/api/logout", authenticate, UserController.logout);                    //need to add 'user' to path?  '/api/user/logout?
+    app.get("/api/logout", authenticate, UserController.logout);                    //need to add 'user' to path?  '/api/user/logout?
     app.get("/api/user/loggedin", authenticate, UserController.getLoggedInUser);
 }
 
