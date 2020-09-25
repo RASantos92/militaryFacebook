@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, navigate, Router } from '@reach/router';
@@ -16,6 +16,7 @@ import Axios from 'axios';
 
 
 function App() {
+
   const[logged,setLogged] = useState(null);
   const handleLogout = () => {
     Axios.get("http://localhost:8000/api/logout",{withCredentials:true})
@@ -31,29 +32,32 @@ function App() {
         {logged !== null ? `${logged.userName}||`:""} {logged !== null ? <Link className="btn btn-outline-warning btn-dark" to={`/user/edit/${logged.id}`}>Edit</Link>:""}{logged !==null ? <Link onClick={handleLogout}className="btn btn-outline-danger btn-dark" to={`/user/edit/${logged.id}`}>Logout</Link>:""}
       </div>:""}
       <div className="col mx-auto">
-        <Link to="/new/"><h1 style={{ color: "black" }} className="bg-white">Military Facebook</h1></Link>
+        <Link to="/new/"><b><h1 style={{ color: "black" }} className="p-2">Military Facebook</h1></b></Link>
       </div>
-      <div className="col">
+      <div className="col mx-auto ">
         {/* <Link to="/new" className="btn btn-info btn-outline-dark">Military Facebook</Link> */}
+
         <Link to={logged !== null ? `/userpage/${logged.id}`:"/"} className="btn btn-info btn-outline-dark">Home</Link>
   <Link to="/user" className="btn btn-info btn-outline-dark">friends</Link>
         <Link to="" className="btn btn-info btn-outline-dark">Recruitment</Link>
         <Link to="/" className="btn btn-info btn-outline-dark">Logout</Link>{/* dont forget to add logout */}
         
+
       </div>
       <Router>
-        <UserPage 
-        path="/userpage/:id" 
-        logged={logged}
+        <UserPage
+          path="/userpage/:id"
+          logged={logged}
         />
-        <UserReg 
-        path="/new"
-        setLogged={setLogged}
+        <UserReg
+          path="/new"
+          setLogged={setLogged}
         />
-        <UserLogin 
-        path="/"
-        setLogged={setLogged}
+        <UserLogin
+          path="/"
+          setLogged={setLogged}
         />
+
         <AllUsers path="/user"/> 
         <ShowUser path="/user/:id"/>
         <UserEdit 
@@ -61,6 +65,7 @@ function App() {
         setLogged={setLogged}
         logged={logged}
         />
+
       </Router>
 
     </div>
