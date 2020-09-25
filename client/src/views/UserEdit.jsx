@@ -24,8 +24,6 @@ const UserEdit = props => {
         userLastName:"",
         userName:"",
         userEmail:"",
-        userPassword:"",
-        userConfirmPW:"",
         userLocation:"",
         userBranch:"",
         userLOS:"",
@@ -50,13 +48,18 @@ const UserEdit = props => {
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(initialErrors)
-        Axios.put(`http://localhost:8000/api/update/user/${logged._id}`,edit,{withCredentials:true})
+        Axios.put(`http://localhost:8000/api/update/user/${edit._id}`,edit,{withCredentials:true})
             .then(res => {
-                console.log(edit)
-                console.log(logged)
-                console.log(res.data)
-                setLogged(logged)
-                navigate(`/userpage/${logged._id}`)
+                console.log("this is edit",edit)
+                console.log("this is logged",logged)
+                console.log("res.data",res.data)
+                console.log("props",props)
+                console.log("props.id",props.id)
+                console.log("props._id",props._id)
+                console.log("edit.id",edit.id)
+                console.log("edit._id",edit._id)
+                setLogged(edit)
+                navigate(`/userpage/${edit._id}`)
             })
             .catch(err => setErrors(err.response.data.errors));
     }

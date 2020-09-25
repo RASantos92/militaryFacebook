@@ -11,6 +11,7 @@ import UserEdit from './views/UserEdit'
 // import Axios from 'axios'
 import background from './assets/img/military.jpg';
 import Axios from 'axios';
+import Recruitment from './views/Recruitment.jsx'
 // import Show from './views/Show';
 // import Edit from './views/Edit';
 
@@ -37,10 +38,12 @@ function App() {
       <div className="col mx-auto ">
         {/* <Link to="/new" className="btn btn-info btn-outline-dark">Military Facebook</Link> */}
 
+
         <Link to={logged !== null ? `/userpage/${logged.id}` : "/"} id="m-1" className="btn btn-info btn-outline-dark p-1">Home</Link>
         <Link to="/user" id="m-1" className="btn btn-info btn-outline-dark p-1">Friends</Link>
-        <Link to="" id="m-1" className="btn btn-info btn-outline-dark p-1">Recruitment</Link>
+        <Link to="/recruitment" id="m-1" className="btn btn-info btn-outline-dark p-1">Recruitment</Link>
         <Link to="/" id="m-1" className="btn btn-info btn-outline-dark p-1">Logout</Link>{/* dont forget to add logout */}
+
 
 
       </div>
@@ -58,9 +61,13 @@ function App() {
           setLogged={setLogged}
         />
 
-        <AllUsers path="/user" />
-        <ShowUser path="/user/:id" />
-        <UserEdit
+        <Recruitment 
+          path="/recruitment"
+          logged={logged}
+        />
+        <AllUsers path="/user"/> 
+        <ShowUser path="/user/:id"/>
+        <UserEdit 
           path="/user/edit/:id"
           setLogged={setLogged}
           logged={logged}
