@@ -46,7 +46,7 @@ const Login = props => {
 
 
     return (
-        <form onSubmit={handleSubmit} className="col-5 my-5 mx-auto bg-dark text-light p-4 rounded">
+        <form onSubmit={handleSubmit} className="col-5 m-5 mx-auto bg-dark text-light p-4 rounded">
             <h2>Login</h2>
             <Input
                 type="text"
@@ -71,7 +71,7 @@ const Login = props => {
             />
             <br></br>
 
-            <Link to="/">Don't have an account?</Link>
+            <Link to="/new">Don't have an account?</Link>
 
         </form>
     );

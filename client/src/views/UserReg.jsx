@@ -40,9 +40,9 @@ const New = props => {
         Axios.post("http://localhost:8000/api/create/user", user,{withCredentials:true})
             .then(res => {
                 if (res.data.user) {
-                    setLogged(res.data.user);
+                    setLogged(user);
                     setUser(initialUser);
-                    navigate(`/userpage/${user.id}`)
+                    navigate(`/userpage/${user._id}`)
                 }
                 else {
                     console.log(res.data)
