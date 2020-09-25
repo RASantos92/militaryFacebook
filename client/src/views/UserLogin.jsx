@@ -49,7 +49,7 @@ const Login = props => {
 
     return (
 
-        <form onSubmit={handleSubmit} className="col-8 m-5 mx-auto bg-dark text-light p-4 rounded ">
+        <form id="box" onSubmit={handleSubmit} className="col-8 m-5 mx-auto bg-dark text-light p-4 rounded">
 
             <h2>Login</h2>
             <Input
