@@ -4,6 +4,7 @@ import UserForm from '../components/UserForm';
 import { navigate } from '@reach/router';
 
 const UserEdit = props => {
+    const {logged,setLogged} = props;
     const initialErrors = {
         userFirstName:"",
         userLastName:"",
@@ -13,6 +14,10 @@ const UserEdit = props => {
         userConfirmPW:"",
         userLocation:"",
         userBranch:"",
+        userLOS:"",
+        userRateMOS:"",
+        userRank:"",
+
     }
     const [edit,setEdit] = useState({
         userFirstName:"",
@@ -23,11 +28,14 @@ const UserEdit = props => {
         userConfirmPW:"",
         userLocation:"",
         userBranch:"",
+        userLOS:"",
+        userRateMOS:"",
+        userRank:"",
     });
     const [errors,setErrors] = useState(initialErrors);
 
     useEffect(() => {
-        Axios.get(`http://localhost:8000/api/user/${props.id}`)
+        Axios.get(`http://localhost:8000/api/user/${logged._id}`,{withCredentials:true})
             .then(res => setEdit(res.data.results))
             .catch(err => console.log(err));
     }, [props])
@@ -42,15 +50,19 @@ const UserEdit = props => {
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(initialErrors)
-        Axios.put(`http://localhost:8000/api/update/user/${edit._id}`,edit)
+        Axios.put(`http://localhost:8000/api/update/user/${logged._id}`,edit,{withCredentials:true})
             .then(res => {
-                navigate(`/user/${edit._id}`)
+                console.log(edit)
+                console.log(logged)
+                console.log(res.data)
+                setLogged(logged)
+                navigate(`/userpage/${logged._id}`)
             })
             .catch(err => setErrors(err.response.data.errors));
     }
     return(
         <div>
-            <h2>Edit {edit.userName}</h2>
+            <h2 className="bg-white">Edit {logged.userName}</h2>
             <UserForm
                 inputs = {edit}
                 errors={errors}
