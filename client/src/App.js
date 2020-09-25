@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, Router } from '@reach/router';
@@ -15,38 +15,38 @@ import background from './assets/img/military.jpg';
 
 
 function App() {
-  const[logged,setLogged] = useState(null);
+  const [logged, setLogged] = useState(null);
   return (
-    <div className="App" style={{ backgroundImage: ` url(${background})` }}>
+    <div className="App" style={{ backgroundImage: ` url(${background})`, minHeight: "100vh" }}>
       <div className="col-10 mx-auto text-align-end bg-white">
-        {logged !== null ? `${logged.userName}||`:""} {logged !== null ? `${logged.userLOS} Years ||`:""} {logged !== null ? `${logged.userRateMOS} Duty`:""}
+        {logged !== null ? `${logged.userName}||` : ""} {logged !== null ? `${logged.userLOS} Years ||` : ""} {logged !== null ? `${logged.userRateMOS} Duty` : ""}
       </div>
       <div className="col mx-auto">
-        <Link to="/new/"><h1 style={{ color: "black" }} className="bg-white">Military Facebook</h1></Link>
+        <Link to="/new/"><b><h1 style={{ color: "black" }} className="p-2">Military Facebook</h1></b></Link>
       </div>
-      <div className="col">
+      <div className="col mx-auto ">
         {/* <Link to="/new" className="btn btn-info btn-outline-dark">Military Facebook</Link> */}
-        <Link to="/" className="btn btn-info btn-outline-dark">Home</Link>
-        <Link to="/user" className="btn btn-info btn-outline-dark">Friends</Link>
-        <Link to="/" className="btn btn-info btn-outline-dark">Recruitment</Link>
-        <Link to="/" className="btn btn-info btn-outline-dark">Liked</Link>
+        <Link to="/" id="m-1" className="btn btn-primary btn-outline-dark p-1 ">Home</Link>
+        <Link to="/user" id="m-1" className="btn btn-primary btn-outline-dark p-1">Friends</Link>
+        <Link to="/" id="m-1" className="btn btn-primary btn-outline-dark p-1">Recruitment</Link>
+        <Link to="/" id="m-1" className="btn btn-primary btn-outline-dark p-1">Liked</Link>
       </div>
       <Router>
-        <UserPage 
-        path="/userpage/:id" 
-        logged={logged}
+        <UserPage
+          path="/userpage/:id"
+          logged={logged}
         />
-        <UserReg 
-        path="/new"
-        setLogged={setLogged}
+        <UserReg
+          path="/new"
+          setLogged={setLogged}
         />
-        <UserLogin 
-        path="/"
-        setLogged={setLogged}
+        <UserLogin
+          path="/"
+          setLogged={setLogged}
         />
-        <AllUsers path="/user"/> 
-        <ShowUser path="/user/:id"/>
-        <UserEdit path="/user/edit/:id"/>
+        <AllUsers path="/user" />
+        <ShowUser path="/user/:id" />
+        <UserEdit path="/user/edit/:id" />
       </Router>
 
     </div>

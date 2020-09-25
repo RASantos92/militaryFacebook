@@ -1,6 +1,6 @@
-*{
+/* *{
   border: red solid 1px;
-}
+} */
 
 .App {
   text-align: center;
@@ -27,7 +27,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-#content{
+#content {
   overflow: scroll;
 }
 .App-link {
@@ -40,5 +40,25 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #m-1 {
+    background-color: red;
+    color: white;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  #m-1 {
+    background-color: blue;
+    color: white;
+  }
+} /*tablets*/
+
+@media only screen and (min-width: 1024px) {
+  #m-1 {
+    margin: 5px; /*desktop view*/
   }
 }

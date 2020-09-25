@@ -4,7 +4,7 @@ import UserForm from '../components/UserForm';
 import { navigate } from '@reach/router';
 
 const New = props => {
-    const {setLogged} = props;
+    const { setLogged } = props;
     const initialUser = {
         userFirstName: "",
         userLastName: "",
@@ -37,7 +37,7 @@ const New = props => {
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(initialErrors)
-        Axios.post("http://localhost:8000/api/create/user", user,{withCredentials:true})
+        Axios.post("http://localhost:8000/api/create/user", user, { withCredentials: true })
             .then(res => {
                 if (res.data.user) {
                     setLogged(res.data.user);
@@ -53,7 +53,7 @@ const New = props => {
     }
     return (
         <div className="container vh-100" id="content">
-            <h2 className="bg-white">Strap Up</h2>
+            <h2 className="bg-primary">Strap Up</h2>
             <UserForm
                 inputs={user}
                 errors={errors}
