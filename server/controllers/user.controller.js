@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { collection } = require('../models/user.model');
 
 module.exports = {
     index: (req, res) => {
@@ -28,6 +29,7 @@ module.exports = {
     },
     update: (req, res) => {
         User.findOne({ _id: req.params.id }, function (err, user) {
+            console.log(req.body)
             user.userFirstName = req.body.userFirstName;
             user.userLastName = req.body.userLastName;
             user.userEmail = req.body.userEmail;
@@ -38,6 +40,7 @@ module.exports = {
             user.userRateMOS = req.body.userRateMOS;
             user.userLOS = req.body.userMessage;
             user.userConfirmPW = req.body.userConfirmPW;
+            user.userName = req.body.userName;
             user.save(function (err, saveduser) {
                 if (saveduser == null)
                     res.status(400).json(err);

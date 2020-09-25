@@ -12,7 +12,7 @@ const Main = props => {
     }, [])
 
     return (
-        <div>
+        <div className="container vh-100" id="content">
             {
                 user.map((u, i) => {
                     return <div className="card col-8 mx-auto box-shadow:-2px 5px 22px 3px (0,0,0,0.63)

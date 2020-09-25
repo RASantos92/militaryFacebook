@@ -7,9 +7,10 @@ const UserPage = props => {
     return (
         <div className="container vh-100 p-2" id="content">
             <div className="col mx-auto">
+                <p className="bg-white m-2">{logged.userName} || {logged.userBranch} || {logged.userLocation}</p>
                 <img src={pic} alt="pic" height="300px" width="250px" />
-                <p className="bg-white">{logged.userName} || {logged.userBranch} || {logged.userLocation}</p>
-                <div className="d-flex justify-content-around bg-white">
+                
+                <div className="d-flex justify-content-around bg-white m-2">
                     <Link to="/" style={{ color: "black" }}>Post</Link>
                     <Link to="/" style={{ color: "black" }}>Upload</Link>
                 </div>
@@ -17,7 +18,7 @@ const UserPage = props => {
             <div id="commentArea" className="col mx-auto h-75 bg-white">
                 posts from other users. direct and indirect
             </div>
-            <div className="col mx-auto h-25 bg-white">
+            <div className="col mx-auto h-25 bg-white m-1">
                 misc content
             </div>
         </div>
