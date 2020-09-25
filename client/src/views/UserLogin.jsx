@@ -25,14 +25,14 @@ const Login = props => {
         e.preventDefault();
         Axios.post("http://localhost:8000/api/login", log, { withCredentials: true })
             .then(res => {
-                setLogged(res.data.user)
-                console.log(res.data.user._id);
-                console.log("were loged in")
+                setLogged(res.data.user);
+                // console.log(res.data.user._id);
+                // console.log("we're logged in");
                 navigate(`/userpage/${res.data.user._id}`);
             })
             .catch(err => {
                 console.log(err.response)
-                console.log('youve hit an error!');
+                console.log("you've hit an error!");
                 setErrors(
                     {
                         userPassword: {

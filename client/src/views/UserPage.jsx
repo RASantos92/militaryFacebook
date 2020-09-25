@@ -6,6 +6,7 @@ const UserPage = props => {
     const { logged } = props;
     return (
         <div className="container vh-100 p-2" id="content">
+
             <div className="col mx-auto">
                 <p className="bg-white m-2">{logged.userName} || {logged.userBranch} || {logged.userLocation}</p>
                 <img src={pic} alt="pic" height="300px" width="250px" />
